@@ -14,9 +14,9 @@ def main():
         choice = input("> ").lower()
 
         if choice == '1':
-            look_up_year_range(book_list)
+            look_up_year_range(global_book_list)
         elif choice == '2':
-            look_up_month_year(book_list)
+            look_up_month_year(global_book_list)
         elif choice == '3':
             search_for_author()
         elif choice == '4':
@@ -101,6 +101,39 @@ def title_search():
             print(book)
     else:
         print("No titles found matching the search string.")
+
+
+def look_up_year_range(book_list):
+    start_year = int(input("Enter start year: "))
+    end_year = int(input("Enter end year: "))
+    
+    matched_books = []
+    for book, date in zip(book_list, global_date_list):
+        year = int(date[-4:])
+        if start_year <= year <= end_year:
+            matched_books.append(book)
+    
+    if matched_books:
+        for book in matched_books:
+            print(book)
+    else:
+        print("No books found within the specified year range.")
+        
+
+def look_up_month_year(book_list):
+    month = input("Enter month: ")
+    year = int(input("Enter year: "))
+    
+    matched_books = []
+    for book, date in zip(book_list, global_date_list):
+        if month.lower() in date.lower() and year == int(date[-4:]):
+            matched_books.append(book)
+    
+    if matched_books:
+        for book in matched_books:
+            print(book)
+    else:
+        print("No books found for the specified month/year.")
 
 
 
