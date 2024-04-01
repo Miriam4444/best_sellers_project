@@ -1,0 +1,104 @@
+
+def main():
+    filename = "bestsellers.txt"
+    read_file()
+
+    while True:
+        print("\nWhat would you like to do?")
+        print("    1: Look up year range")
+        print("    2: Look up month/year")
+        print("    3: Search for author")
+        print("    4: Search for title")
+        print("    Q: Quit")
+
+        choice = input("> ").lower()
+
+        if choice == '1':
+            look_up_year_range(book_list)
+        elif choice == '2':
+            look_up_month_year(book_list)
+        elif choice == '3':
+            search_for_author()
+        elif choice == '4':
+            title_search
+        elif choice == 'q':
+            print("Done")
+            break
+        else:
+            print("I don't understand this command")
+
+
+def read_file():
+    infile = open('bestsellers.txt' , 'r')
+    book_list = []
+    for line in infile:
+        line = line.strip()
+        cols = line.split('\t')
+        book_list.append(cols)
+        global global_book_list
+        global_book_list = book_list
+        #print(cols)
+        #make all the lists
+    title_list = []
+    author_list = []
+    publisher_list = []
+    date_list = []
+        
+
+    #add the categories to the list
+    for book in book_list:
+        #make title list
+        title = book[0]
+        title_list.append(title)
+        global global_title_list
+        global_title_list = title_list
+            #make author list
+        author = book[1]
+        author_list.append(author)
+        global global_author_list
+        global_author_list = author_list
+            #make publisher list
+        publisher = book[2]
+        publisher_list.append(publisher)
+            #make date list
+        date = book[3]
+        date_list.append(date)
+        #print(title_list)
+        #print(author_list)
+        #print(publisher_list)
+        #print(date_list)
+
+
+def search_for_author():
+    search_string = input(str('Enter search string: '))
+    author_count = (global_author_list.count(search_string))
+    print(author_count)
+    author_index_num = 0
+    new_author_list = global_author_list
+    for i in range(author_count):
+        search_str_index = new_author_list.index(search_string)
+        #print(search_str_index)
+        author_spot = (new_author_list[search_str_index])
+        print(author_spot)
+        author_index_num = ((search_str_index) + 1)
+        print(global_book_list[search_str_index])
+        new_author_list = global_author_list[search_str_index:]
+
+def title_search():
+    search_string = input(str("Enter search string: "))
+    title_count = (global_title_list.count(searchIstring))
+    print(title_count)
+    title_index_num = 0
+    new_title_list = global_title_list
+    for i in range(title_count):
+        search_str_index = new_author_list.index(search_string)
+        title_spot = (new_title_list[search_str_index])
+        print(title_spot)
+        title_index_num = ((search_str_index) +1)
+        print(global_book_list[search_str_index])
+        new_title_list = global_title_list[search_str_index:]
+
+
+
+if __name__ == "__main__":
+    main()
