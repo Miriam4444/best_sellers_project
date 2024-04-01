@@ -73,37 +73,35 @@ def read_file():
         #print(date_list)
 
 
+
 def search_for_author():
-    search_string = input('Enter search string: ')
-    author_count = global_author_list.count(search_string)
-    print(author_count)
-    current_index = 0
-    while author_count > 0:
-        try:
-            search_str_index = global_author_list.index(search_string, current_index)
-            author_spot = global_author_list[search_str_index]
-            print(author_spot)
-            print(global_book_list[search_str_index])
-            current_index = search_str_index + 1
-            author_count -= 1
-        except ValueError:
-            break
+    search_string = input('Enter search string: ').lower()  
+    matched_authors = [] 
+    for author, book in zip(global_author_list, global_book_list):
+        if search_string in author.lower():  
+            matched_authors.append((author, book)) 
+    if matched_authors:
+        for author, book in matched_authors:
+            #print(author)
+            print(book)
+    else:
+        print("No authors found matching the search string.")
 
 
-        
+
 def title_search():
-    search_string = input("Enter search string: ")  
-    title_count = global_title_list.count(search_string)
-    print(title_count)
-    title_index_num = 0
-    new_title_list = global_title_list
-    for i in range(title_count):
-        search_str_index = new_title_list.index(search_string)
-        title_spot = new_title_list[search_str_index]
-        print(title_spot)
-        title_index_num = search_str_index + 1  
-        print(global_book_list[search_str_index])
-        new_title_list = new_title_list[search_str_index + 1:]  
+    search_string = input("Enter search string: ").lower() 
+    matched_titles = [] 
+    for title, book in zip(global_title_list, global_book_list):
+        if search_string in title.lower():
+            matched_titles.append((title, book)) 
+    if matched_titles:
+        for title, book in matched_titles:
+            #print(title)
+            print(book)
+    else:
+        print("No titles found matching the search string.")
+
 
 
 
